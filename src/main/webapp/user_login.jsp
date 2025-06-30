@@ -126,7 +126,7 @@
 <body>
 <div class="wrapper">
             <div class="title"><span>User Login</span></div>
-            <form action="#" method="post">
+            <form action="user_login" method="post">
                 <div class="row">
                     <i class="fas fa-user"></i>
                     <input type="text" placeholder="Email or Phone" required />
