@@ -26,7 +26,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Appoinment</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="user_login.jsp.jsp">User</a>
+                    <a class="nav-link active" aria-current="page" href="user_login.jsp">User</a>
                 </li>
 
 <%--                <li class="nav-item">--%>
