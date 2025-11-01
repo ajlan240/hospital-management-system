@@ -137,38 +137,41 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Dr. John Smith</td>
-                    <td>Cardiology</td>
-                    <td>2025-10-30</td>
-                    <td>10:00 AM</td>
-                    <td class="status confirmed">Confirmed</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Dr. Emily Davis</td>
-                    <td>Neurology</td>
-                    <td>2025-11-02</td>
-                    <td>02:30 PM</td>
-                    <td class="status pending">Pending</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Dr. Rajesh Kumar</td>
-                    <td>Orthopedics</td>
-                    <td>2025-11-05</td>
-                    <td>09:15 AM</td>
-                    <td class="status cancelled">Cancelled</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Dr. Sarah Johnson</td>
-                    <td>Dermatology</td>
-                    <td>2025-11-10</td>
-                    <td>11:45 AM</td>
-                    <td class="status confirmed">Confirmed</td>
-                </tr>
+                <c:forEach var="app" items="${sessionScope.appointmentList}">
+                    <tr>
+                        <td>${app.appId}</td>
+                        <td>${app.docterName}</td>
+                        <td>${app.docterDept}</td>
+                        <td>${app.date}</td>
+                        <td>${app.time}</td>
+                        <td class="status ${app.status}">${app.status}</td>
+                    </tr>
+                </c:forEach>
+
+<%--                <tr>--%>
+<%--                    <td>2</td>--%>
+<%--                    <td>Dr. Emily Davis</td>--%>
+<%--                    <td>Neurology</td>--%>
+<%--                    <td>2025-11-02</td>--%>
+<%--                    <td>02:30 PM</td>--%>
+<%--                    <td class="status pending">Pending</td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td>3</td>--%>
+<%--                    <td>Dr. Rajesh Kumar</td>--%>
+<%--                    <td>Orthopedics</td>--%>
+<%--                    <td>2025-11-05</td>--%>
+<%--                    <td>09:15 AM</td>--%>
+<%--                    <td class="status cancelled">Cancelled</td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td>4</td>--%>
+<%--                    <td>Dr. Sarah Johnson</td>--%>
+<%--                    <td>Dermatology</td>--%>
+<%--                    <td>2025-11-10</td>--%>
+<%--                    <td>11:45 AM</td>--%>
+<%--                    <td class="status confirmed">Confirmed</td>--%>
+<%--                </tr>--%>
                 </tbody>
             </table>
         </div>

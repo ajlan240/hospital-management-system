@@ -26,13 +26,20 @@ public class AppointmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AppointmentDao appDao = null;
         HttpSession session = req.getSession();
+        User u1 = (User)session.getAttribute("user-obj");
         try {
+
             appDao = new AppointmentDao(DBConnect.getConn());
             List<Department> departmentList = appDao.fetchDepartments();
+            List<Appointment> appointmentList = appDao.fetchAppoList(u1);
 
-//        req.setAttribute("deptList", departmentList);
+            req.setAttribute("appAddStatus", "");
             session.setAttribute("selectedDept", "Choose a department");
             session.setAttribute("deptList", departmentList);
+            session.setAttribute("appointmentList", appointmentList);
+
+
+
             resp.sendRedirect("appointment.jsp");
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -43,6 +50,7 @@ public class AppointmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User u1 = (User)session.getAttribute("user-obj");
+        String doctDept = (String) session.getAttribute("selectedDept");
         String doctName = req.getParameter("doctor");
         LocalDate date = LocalDate.parse(req.getParameter("date"));
         LocalTime time = LocalTime.parse(req.getParameter("time"));
@@ -51,16 +59,20 @@ public class AppointmentServlet extends HttpServlet {
         int userId = u1.getId();
         Appointment appointment = new Appointment();
         boolean isAppAdded = false;
+        AppointmentDao dao;
+
         RequestDispatcher rd = req.getRequestDispatcher("appointment.jsp");
         System.out.println(userId);
         try {
-            AppointmentDao dao = new AppointmentDao(DBConnect.getConn());
+
+            dao = new AppointmentDao(DBConnect.getConn());
             appointment.setDocterName(doctName);
             appointment.setDate(date);
             appointment.setTime(time);
             appointment.setStatus(status);
             appointment.setReason(reason);
             appointment.setUserId(userId);
+            appointment.setDocterDept(doctDept);
             isAppAdded = dao.addAppointment(appointment);
 
         } catch (Exception e) {
@@ -69,6 +81,9 @@ public class AppointmentServlet extends HttpServlet {
         if(isAppAdded) {
             req.setAttribute("appAddStatus", "App Added Successfully");
             req.setAttribute("color", "green");
+            List<Appointment> appointmentList = dao.fetchAppoList(u1);
+            session.setAttribute("appointmentList", appointmentList);
+
             rd.forward(req, resp);
         }
         else {

@@ -3,8 +3,11 @@ package com.dao;
 import com.entity.Appointment;
 import com.entity.Department;
 import com.entity.Docter;
+import com.entity.User;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +65,7 @@ public class AppointmentDao {
     }
 
     public boolean addAppointment(Appointment appointment) {
-        String sql = "INSERT INTO appointments(doct_name, app_date, app_time, app_reason, user_id, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO appointments(doct_name, app_date, app_time, app_reason, user_id, status, doct_dept) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Date date = Date.valueOf(appointment.getDate());
         Time time = Time.valueOf(appointment.getTime());
         try {
@@ -73,6 +76,7 @@ public class AppointmentDao {
             ps.setString(4, appointment.getReason());
             ps.setInt(5, appointment.getUserId());
             ps.setString(6, appointment.getStatus());
+            ps.setString(7, appointment.getDocterDept());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -80,5 +84,48 @@ public class AppointmentDao {
         }
 
 
+    }
+
+    public List<Appointment> fetchAppoList(User u1) {
+        Appointment appointment;
+        List<Appointment> appointmentList = new ArrayList<>();
+        int id, userId;
+        String doctName;
+        Date date;
+        Time time;
+        String status;
+        String doctDept;
+        String sql = "SELECT * FROM appointments WHERE user_id=? ORDER BY app_date ASC";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, u1.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("app_id");
+                doctName = rs.getString("doct_name");
+                date = rs.getDate("app_date");
+                 time = rs.getTime("app_time");
+                 status = rs.getString("status");
+                 doctDept = rs.getString("doct_dept");
+                 userId = u1.getId();
+
+                 appointment = new Appointment();
+                 appointment.setAppId(id);
+                 appointment.setUserId(userId);
+                 appointment.setDocterName(doctName);
+                 appointment.setDate(date.toLocalDate());
+                 appointment.setTime(time.toLocalTime());
+                 appointment.setStatus(status);
+                 appointment.setDocterDept(doctDept);
+
+                appointmentList.add(appointment);
+            }
+            for (Appointment appointment1 : appointmentList)
+                System.out.println(appointment1);
+
+            return appointmentList;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

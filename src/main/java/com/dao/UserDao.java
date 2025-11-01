@@ -60,19 +60,21 @@ public class UserDao {
     }
     public User fetchUserDetails(User user) throws SQLException {
         User u1 = new User();
+        int id = 0;
         String userName = "";
         long phone = 0;
         Date dob = null;
         String gender = "";
         String bloodGroup = "";
         String address = "";
-        String sql = "SELECT user_name, user_phone, dob, geneder, blood_group, address FROM user_details WHERE user_email=?";
+        String sql = "SELECT * FROM user_details WHERE user_email=?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getEmail());
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {
+                id = rs.getInt("user_id");
                 userName = rs.getString("user_name");
                 phone = rs.getLong("user_phone");
                 dob = rs.getDate("dob");
@@ -81,7 +83,7 @@ public class UserDao {
                 address = rs.getString("address");
 
             }
-
+            u1.setId(id);
             u1.setUname(userName);
             u1.setEmail(user.getEmail());
             u1.setPhoneNo(phone);

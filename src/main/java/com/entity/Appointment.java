@@ -87,4 +87,18 @@ public class Appointment {
     public void setUserPhone(long userPhone) {
         this.userPhone = userPhone;
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appId=" + appId +
+                ", date=" + date +
+                ", time=" + time +
+                ", status='" + status + '\'' +
+                ", reason='" + reason + '\'' +
+                ", userId=" + userId +
+                ", docterName='" + docterName + '\'' +
+                ", docterDept='" + docterDept + '\'' +
+                '}';
+    }
 }
