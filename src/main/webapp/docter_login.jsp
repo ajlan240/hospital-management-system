@@ -38,7 +38,7 @@
                         <button type="submit" class="btn bg-success text-white col-md-12">Login</button>
                     </form>
                     </form>
-                    <br>Don't have an account ?<a href="signup.jsp" class="link">create one</a>
+                    <br>Don't have an account ?<a href="user-reg.jsp" class="link">create one</a>
                 </div>
             </div>
         </div>

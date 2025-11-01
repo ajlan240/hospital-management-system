@@ -20,20 +20,27 @@ public class UserLogin extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         User u1 = new User(email, password);
+        User u2;
         HttpSession session1 = req.getSession();
         try {
             UserDao dao = new UserDao(DBConnect.getConn());
-            u1 = dao.userLogin(u1);
+            u2 = dao.userLogin(u1);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        if(!(u1 == null)) {
-            session1.setAttribute("uname", u1.getUname());
+        if(u2 != null) {
+            try {
+                UserDao dao = new UserDao(DBConnect.getConn());
+                u2 = dao.fetchUserDetails(u1);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            session1.setAttribute("user-obj", u2);
             resp.sendRedirect("user-dashboard.jsp");
-            System.out.println(u1);
+            System.out.println(u2);
         } else {
             session1.setAttribute("erMsg", "error email or password");
-            resp.sendRedirect("user_login.jsp");
+            resp.sendRedirect("user-login.jsp");
         }
 
     }

@@ -1,175 +1,135 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page isELIgnored="false" %>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.entity.User" %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0);
+    User u1 = (User) session.getAttribute("user-obj");
+    if (u1 == null) {
+        response.sendRedirect("user-login.jsp");
+        return;
+    }
+
+%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User DashBoard</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <title>User Dashboard | MediHome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<%
 
-if(session.getAttribute("uname") == null) {
-    response.sendRedirect("user_login.jsp");
-    return;
-}
-%>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/userDashboard.css">
+</head>
+
+<body>
+
+<!-- Sidebar -->
 <div class="sidebar">
     <div class="logo-details">
         <i class='bx bxs-clinic'></i>
         <span class="logo_name">MediHome</span>
     </div>
     <ul class="nav-links">
-        <li>
-            <a href="#" class="active">
-                <i class='bx bx-grid-alt' ></i>
-                <span class="links_name">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-calendar-check'></i>
-                <span class="links_name">Appoinments</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-file'></i>
-                <span class="links_name">Medical Records</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-credit-card'></i>
-                <span class="links_name">Billing</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-envelope'></i>
-                <span class="links_name">Notification</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-user'></i>
-                <span class="links_name">profiles</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-help-circle'></i>
-                <span class="links_name">Support</span>
-            </a>
-        </li>
-        <li class="log_out">
-            <a href="logout" type="post">
-                <i class='bx bx-log-out'></i>
-                <span class="links_name">Log out</span>
-            </a>
-        </li>
+        <li><a href="user-dashboard.jsp" class="active"><i class='bx bx-grid-alt'></i><span>Dashboard</span></a></li>
+        <li><a href="appointment.jsp"><i class='bx bx-calendar'></i><span>Appointments</span></a></li>
+        <li><a href="#"><i class='bx bx-file'></i><span>Medical Records</span></a></li>
+        <li><a href="#"><i class='bx bx-credit-card'></i><span>Payments</span></a></li>
+        <li><a href="#"><i class='bx bx-chat'></i><span>Messages</span></a></li>
+        <li><a href="user-profile.jsp"><i class='bx bx-user'></i><span>Profile</span></a></li>
+        <li class="logout"><a href="logout"><i class='bx bx-log-out'></i><span>Logout</span></a></li>
     </ul>
 </div>
+
+<!-- Main Content -->
 <section class="home-section">
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-menu sidebarBtn'></i>
             <span class="dashboard">Dashboard</span>
         </div>
-        <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search' ></i>
-        </div>
         <div class="profile-details">
-            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-photos%2Fman&psig=AOvVaw0oPx3TZ1S9Ym1CAAalRcrZ&ust=1759480443572000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNibk8eNhZADFQAAAAAdAAAAABAK" alt="">
-            <span class="admin_name">${sessionScope.uname}</span>
-            <i class='bx bx-chevron-down' ></i>
+            <a href="user-profile.jsp" style="text-decoration: none; color: inherit;">
+                <i class='bx bx-user-circle' style="cursor: pointer;"></i>
+            </a>
+            <span class="admin_name">Welcome, <%= u1.getUname() %></span>
         </div>
     </nav>
+
     <div class="home-content">
         <div class="overview-boxes">
-            <div class="box" onclick="window.location.href='user-profile.jsp'" style="cursor:pointer;">
-                <div class="right-side">
-                    <div class="box-topic">Your profile</div>
-                    <div class="text">${sessionScope.uname}</div>
-                    <div class="indicator">
-                        <span class="text" style="color: red">profile completed</span>
+            <a href="appointmentServlet" class="box-link">
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Appointments</div>
+                        <div class="number">12</div>
+                        <div class="indicator text-success">
+                            <i class='bx bx-up-arrow-alt'></i> Active
+                        </div>
                     </div>
+                    <i class='bx bx-calendar-check cart'></i>
                 </div>
-                <i class='bx bxs-user profile'></i>
-            </div>
+            </a>
+
             <div class="box">
                 <div class="right-side">
-                    <div class="box-topic">Pending Bills</div>
-                    <div class="number">38,876</div>
-                    <div class="indicator">
-                        <i class='bx bx-up-arrow-alt'></i>
-                        <span class="text">Up from yesterday</span>
-                    </div>
+                    <div class="box-topic">Medical Records</div>
+                    <div class="number">28</div>
+                    <div class="indicator text-info"><i class='bx bx-up-arrow-alt'></i> Updated</div>
                 </div>
-                <i class='bx bxs-cart-add cart two' ></i>
+                <i class='bx bx-file cart two'></i>
             </div>
+
             <div class="box">
                 <div class="right-side">
-                    <div class="box-topic">Total Profit</div>
-                    <div class="number">$12,876</div>
-                    <div class="indicator">
-                        <i class='bx bx-up-arrow-alt'></i>
-                        <span class="text">Up from yesterday</span>
-                    </div>
+                    <div class="box-topic">Payments</div>
+                    <div class="number">₹3,540</div>
+                    <div class="indicator text-warning"><i class='bx bx-up-arrow-alt'></i> Pending</div>
                 </div>
-                <i class='bx bx-cart cart three' ></i>
+                <i class='bx bx-credit-card cart three'></i>
             </div>
+
             <div class="box">
                 <div class="right-side">
-                    <div class="box-topic">Total Return</div>
-                    <div class="number">11,086</div>
-                    <div class="indicator">
-                        <i class='bx bx-down-arrow-alt down'></i>
-                        <span class="text">Down From Today</span>
-                    </div>
+                    <div class="box-topic">Messages</div>
+                    <div class="number">4</div>
+                    <div class="indicator text-primary"><i class='bx bx-up-arrow-alt'></i> New</div>
                 </div>
-                <i class='bx bxs-cart-download cart four' ></i>
+                <i class='bx bx-chat cart four'></i>
             </div>
-            <div class="box">
-                <div class="right-side">
-                    <div class="box-topic">Total Order</div>
-                    <div class="number">40,876</div>
-                    <div class="indicator">
-                        <i class='bx bx-up-arrow-alt'></i>
-                        <span class="text">Up from yesterday</span>
-                    </div>
-                </div>
-                <i class='bx bx-cart-alt cart'></i>
-            </div>
-            <div class="box">
-                <div class="right-side">
-                    <div class="box-topic">Total Order</div>
-                    <div class="number">40,876</div>
-                    <div class="indicator">
-                        <i class='bx bx-up-arrow-alt'></i>
-                        <span class="text">Up from yesterday</span>
-                    </div>
-                </div>
-                <i class='bx bx-cart-alt cart'></i>
-            </div>
+        </div>
+
+        <div class="activity-box mt-4">
+            <h4>Recent Activity</h4>
+            <table class="table table-striped align-middle mt-3">
+                <thead class="table-primary">
+                <tr>
+                    <th>Activity</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td>Doctor Appointment - Dr. Smith</td><td>25 Oct 2025</td><td><span class="badge bg-success">Completed</span></td></tr>
+                <tr><td>Blood Test Report Uploaded</td><td>22 Oct 2025</td><td><span class="badge bg-info">Reviewed</span></td></tr>
+                <tr><td>Payment for MRI Scan</td><td>21 Oct 2025</td><td><span class="badge bg-warning">Pending</span></td></tr>
+                <tr><td>New Message from Cardiologist</td><td>20 Oct 2025</td><td><span class="badge bg-primary">Unread</span></td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
-<script>
-let sidebar = document.querySelector(".sidebar");
- let sidebarBtn = document.querySelector(".sidebarBtn");
- sidebarBtn.onclick = function() {
-   sidebar.classList.toggle("active");
-   if(sidebar.classList.contains("active")){
-   sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
- }else
-   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
- }
-</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

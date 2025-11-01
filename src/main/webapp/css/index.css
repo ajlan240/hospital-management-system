@@ -1,0 +1,68 @@
+/* ===== General Styling ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    scroll-behavior: smooth;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    padding: 15px 0;
+}
+
+.navbar .nav-link {
+    color: #0d6efd;
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.navbar .nav-link:hover {
+    color: #0a58ca;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    background: linear-gradient(rgba(13,110,253,0.8), rgba(13,110,253,0.8)),
+    url('https://img.freepik.com/free-photo/blurred-modern-hospital-room-background_23-2148980721.jpg') center/cover no-repeat;
+    height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 15px;
+}
+
+/* ===== About ===== */
+#about img {
+    border-radius: 12px;
+}
+
+/* ===== Service Cards ===== */
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* ===== Doctors ===== */
+.doctor-card img {
+    object-fit: cover;
+    border: 3px solid #0d6efd;
+}
+.doctor-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.doctor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* ===== Footer ===== */
+footer {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}

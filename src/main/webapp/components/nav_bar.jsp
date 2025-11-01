@@ -16,7 +16,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Appointment</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="user_login.jsp">User</a>
+                    <a class="nav-link" href="../user-login.jsp">User</a>
                 </li>
 <%--                <li class="nav-item dropdown">--%>
 <%--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>

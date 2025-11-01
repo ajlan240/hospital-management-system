@@ -18,6 +18,7 @@
 </head>
 <body>
 <%@include file="components/nav_bar.jsp"%>
+
 <div class="all-classes-container p-5">
     <div class="row">
         <div class="col-md-4 offset-md-4">
@@ -29,14 +30,13 @@
                             <label class="form-label">Email Address</label>
                             <input required name="email" type="email" class="form-control">
                         </div>
-
                         <div class="mb-3">
                             <label class="form-label">Password</label>
                             <input required name="password" type="password" class="form-control">
                         </div>
                         <button type="submit" class="btn bg-success text-white col-md-12">Login</button>
                     </form>
-                    <br>Don't have an account ?<a href="signup.jsp" class="link">create one</a>
+                    <br>Don't have an account ?<a href="user-reg.jsp" class="link">create one</a>
                 </div>
             </div>
         </div>

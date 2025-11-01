@@ -1,0 +1,45 @@
+body {
+    background-color: #f4f6f9;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.login-container {
+    background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+}
+
+.login-card {
+    width: 400px;
+    transition: all 0.3s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    font-size: 15px;
+}
+
+.btn-primary {
+    border-radius: 12px;
+    background: #0d6efd;
+    border: none;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #084298;
+}
+
+.text-muted a {
+    color: #0d6efd !important;
+}
+
+.bi-hospital {
+    font-size: 3rem;
+}

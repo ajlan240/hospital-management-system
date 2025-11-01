@@ -12,9 +12,9 @@ import java.io.IOException;
 public class UserLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.removeAttribute("uname");
+        HttpSession session = req.getSession(false);
+        session.removeAttribute("user-obj");
         session.invalidate();
-        resp.sendRedirect("user_login.jsp");
+        resp.sendRedirect("user-login.jsp");
     }
 }

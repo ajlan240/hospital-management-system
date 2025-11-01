@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f6fa;
+    color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #0d6efd;
+    padding-top: 20px;
+}
+
+.sidebar .logo-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+}
+
+.sidebar .logo-details i {
+    font-size: 30px;
+    color: white;
+    margin-right: 8px;
+}
+
+.sidebar .logo-details .logo_name {
+    font-size: 22px;
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar .nav-links {
+    margin-top: 30px;
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .nav-links li {
+    padding: 10px 25px;
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.sidebar .nav-links li a:hover,
+.sidebar .nav-links li a.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+.sidebar .nav-links li i {
+    font-size: 22px;
+    margin-right: 15px;
+}
+
+.sidebar .logout {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+/* Main Section */
+.home-section {
+    margin-left: 230px;
+    padding: 25px 35px;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 15px 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+nav .sidebar-button {
+    display: flex;
+    align-items: center;
+}
+
+nav .sidebar-button i {
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+nav .profile-details {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+nav .profile-details i {
+    font-size: 28px;
+    color: #0d6efd;
+    margin-right: 8px;
+}
+/* Page Title */
+.page-title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Appointment Form */
+.appointment-form {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+}
+
+.appointment-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #0d6efd;
+    outline: none;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary {
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    align-self: flex-start;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background: #0b5ed7;
+}
+
+/* Appointment Table */
+.table-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.styled-table th {
+    background: #0d6efd;
+    color: #fff;
+    padding: 12px;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.styled-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.styled-table tr:hover {
+    background: #f0f7ff;
+}
+
+.status {
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 4px 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.status.confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status.cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .home-section {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+}
